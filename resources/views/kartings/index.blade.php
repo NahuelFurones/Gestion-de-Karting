@@ -1,1 +1,46 @@
-<!DOCTYPE html><html><head><title>Kartings</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></head><body><div class="container mt-4"><h1>Kartings</h1><a class="btn btn-primary mb-3" href="{{ route('kartings.create') }}">Crear Karting</a>@if($kartings->count())<table class="table table-bordered"><thead><tr><th>ID</th><th>Nombre</th><th>Ubicación</th><th>Acciones</th></tr></thead><tbody>@foreach($kartings as $k)<tr><td>{{ $k->id }}</td><td>{{ $k->name }}</td><td>{{ $k->location }}</td><td><a class="btn btn-sm btn-info" href="{{ route('kartings.show',$k) }}">Ver</a> <a class="btn btn-sm btn-warning" href="{{ route('kartings.edit',$k) }}">Editar</a> <form style="display:inline" method="POST" action="{{ route('kartings.destroy',$k) }}">@csrf @method('DELETE')<button class="btn btn-sm btn-danger">Eliminar</button></form></td></tr>@endforeach</tbody></table>{{ $kartings->links() }}@else<p>No hay kartings.</p>@endif</div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kartings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Kartings</h1>
+        <a class="btn btn-primary mb-3" href="{{ route('kartings.create') }}">Crear Karting</a>
+        @if($kartings->count())
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Ubicación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($kartings as $k)
+                        <tr>
+                            <td>{{ $k->id }}</td>
+                            <td>{{ $k->name }}</td>
+                            <td>{{ $k->location }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info" href="{{ route('kartings.show',$k) }}">Ver</a>
+                                <a class="btn btn-sm btn-warning" href="{{ route('kartings.edit',$k) }}">Editar</a>
+                                <form style="display:inline" method="POST" action="{{ route('kartings.destroy',$k) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{ $kartings->links() }}
+        @else
+            <p>No hay kartings.</p>
+        @endif
+    </div>
+</body>
+</html>
